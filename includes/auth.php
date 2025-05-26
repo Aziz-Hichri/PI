@@ -22,7 +22,7 @@ function register($username, $email, $password) {
 function login($email, $password) {
     $conn = getConnection();
     
-    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -32,6 +32,7 @@ function login($email, $password) {
         if (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
             return true;
         }
     }
@@ -47,10 +48,14 @@ function logout() {
     session_destroy();
 }
 
+function isAdmin() {
+    return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+}
+
 function getCurrentUser() {
     if (isLoggedIn()) {
         $conn = getConnection();
-        $stmt = $conn->prepare("SELECT id, username, email FROM users WHERE id = ?");
+        $stmt = $conn->prepare("SELECT id, username, email, role FROM users WHERE id = ?");
         $stmt->bind_param("i", $_SESSION['user_id']);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();

@@ -27,7 +27,15 @@ if (isset($_GET['ingredients']) && !empty($_GET['ingredients'])) {
 include '../partials/header.php';
 ?>
 
-<div class="container">    <div class="search-section">        <h2 class="section-title">Find Recipes by Ingredients</h2>            <form method="GET" action="<?php echo $base_url; ?>/views/recipes.php" class="ingredient-search-form">
+<div class="container">
+    <?php if (isLoggedIn() && isAdmin()): ?>
+        <div style="margin: 1em 0;">
+            <a href="<?php echo $base_url; ?>/views/add_recipe.php" class="btn btn-primary">Add Recipe</a>
+        </div>
+    <?php endif; ?>
+    <div class="search-section">
+        <h2 class="section-title">Find Recipes by Ingredients</h2>
+        <form method="GET" action="<?php echo $base_url; ?>/views/recipes.php" class="ingredient-search-form">
             <div class="form-group search-input-group">
                 <label for="ingredient-search">What ingredients do you have?</label>
                 <div class="search-input-wrapper">

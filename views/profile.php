@@ -30,6 +30,7 @@ include '../partials/header.php';
                 <p><strong>Username:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
                 <p><strong>Saved Recipes:</strong> <?php echo $favorite_count; ?></p>
+                <p><strong>Role:</strong> <?php echo htmlspecialchars($user['role']); ?></p>
             </div>
         </div>
         
