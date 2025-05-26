@@ -12,6 +12,12 @@ if (!isLoggedIn()) {
     header('Location: ' . $base_url . '/views/auth/login.php');
     exit();
 }
+// Restrict to admin only
+if (!isAdmin()) {
+    http_response_code(403);
+    echo '<h2>Access Denied</h2><p>You do not have permission to access this page.</p>';
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');

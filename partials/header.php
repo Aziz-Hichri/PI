@@ -40,3 +40,8 @@ require_once __DIR__ . '/../includes/auth.php';
     <?php if (isset($success)): ?>
         <div class="alert alert-success"><?php echo $success; ?></div>
     <?php endif; ?>
+    <ul>
+        <?php if (isLoggedIn() && isAdmin()): ?>
+            <!-- Add more admin links here if needed -->
+        <?php endif; ?>
+    </ul>

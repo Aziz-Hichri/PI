@@ -22,7 +22,7 @@ include '../partials/header.php';
 <div class="container">
     <h1 class="page-title">Ingredients List</h1>
     
-    <?php if (isLoggedIn()): ?>
+    <?php if (isLoggedIn() && isAdmin()): ?>
     <div class="add-ingredient-section">
         <h2>Add New Ingredient</h2>
         <form action="<?php echo $base_url; ?>/views/add_ingredient.php" method="POST" class="ingredient-form">

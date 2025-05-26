@@ -38,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // Create new user
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 'user')");
             $stmt->bind_param("sss", $username, $email, $hashed_password);
-              if ($stmt->execute()) {
+            if ($stmt->execute()) {
                 $success = 'Account created successfully! You can now login.';
                 header('Refresh: 2; URL=' . $base_url . '/views/auth/login.php');
             } else {
